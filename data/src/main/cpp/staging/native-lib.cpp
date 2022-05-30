@@ -8,3 +8,19 @@ Java_com_sunggil_cmaketest_Name_a(
     std::string baseUrl = "BASEURL";
     return env->NewStringUTF(baseUrl.c_str());
 }
+
+extern "C" JNIEXPORT jstring JNICALL
+Java_com_sunggil_cmaketest_Name_b(
+        JNIEnv *env,
+        jobject /* this */) {
+    std::string token = "TOKEN";
+    return env->NewStringUTF(token.c_str());
+}
+
+extern "C" JNIEXPORT jstring JNICALL
+Java_com_sunggil_cmaketest_Name_c(
+        JNIEnv *env,
+        jobject /* this */) {
+    std::string decryptKey = "DECRYPTKEY;
+    return env->NewStringUTF(decryptKey.c_str());
+}

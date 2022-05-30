@@ -6,8 +6,20 @@ object Name {
     }
 
     /**
-     * vision baseUrl
+     * API baseUrl
      * @return
      */
-    external fun a() : String?
+    external fun a() : String
+
+    /**
+     * API Token
+     * @return
+     */
+    external fun b() : String
+
+    /**
+     * API Token decryptKey
+     * @return
+     */
+    external fun c() : String
 }
