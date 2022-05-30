@@ -17,10 +17,56 @@ android {
         consumerProguardFiles "consumer-rules.pro"
     }
 
-    buildTypes {
+    signingConfigs {
+        debug {
+            //.android default keystore 정보
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('../debug.keystore')
+            storePassword 'android'
+        }
         release {
-            minifyEnabled false
+            //private keystore 정보
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('../debug.keystore')
+            storePassword 'android'
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false     //난독화 유무
+            signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            externalNativeBuild {
+                cmake {
+                    //-D이후의 문자열이 변수명이 된다
+                    arguments "-DCMAKE_BUILD_TYPE=debug"
+                }
+            }
+        }
+        release {
+            minifyEnabled false     //난독화 유무
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            externalNativeBuild {
+                cmake {
+                    //-D이후의 문자열이 변수명이 된다
+                    arguments "-DCMAKE_BUILD_TYPE=release"
+                }
+            }
+        }
+        staging {
+            minifyEnabled false     //난독화 유무
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            externalNativeBuild {
+                cmake {
+                    //-D이후의 문자열이 변수명이 된다
+                    arguments "-DCMAKE_BUILD_TYPE=staging"
+                }
+            }
         }
     }
     compileOptions {
@@ -29,6 +75,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    externalNativeBuild {
+        cmake {
+            path file('src/main/cpp/CMakeLists.txt')
+            version = "3.10.2"
+        }
     }
 }
 
