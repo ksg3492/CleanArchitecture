@@ -2,7 +2,7 @@
 #include <string>
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_com_sunggil_cmaketest_Name_a(
+Java_com_sunggil_cleanarchitecture_data_Name_a(
         JNIEnv *env,
         jobject /* this */) {
     std::string baseUrl = "BASEURL";
@@ -10,7 +10,7 @@ Java_com_sunggil_cmaketest_Name_a(
 }
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_com_sunggil_cmaketest_Name_b(
+Java_com_sunggil_cleanarchitecture_data_Name_b(
         JNIEnv *env,
         jobject /* this */) {
     std::string token = "TOKEN";
@@ -18,9 +18,9 @@ Java_com_sunggil_cmaketest_Name_b(
 }
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_com_sunggil_cmaketest_Name_c(
+Java_com_sunggil_cleanarchitecture_data_Name_c(
         JNIEnv *env,
         jobject /* this */) {
-    std::string decryptKey = "DECRYPTKEY;
+    std::string decryptKey = "DECRYPTKEY";
     return env->NewStringUTF(decryptKey.c_str());
 }
