@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion "30.0.3"
+    compileSdkVersion compile_version
+    buildToolsVersion build_tools_version
 
     defaultConfig {
         applicationId "com.sunggil.cleanarchitecture"
-        minSdkVersion 23
-        targetSdkVersion 31
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
         versionCode version_code
         versionName version_name
 
