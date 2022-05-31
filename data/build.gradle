@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -10,13 +12,12 @@ android {
     defaultConfig {
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 1
-        versionName "1.0"
+        versionCode version_code
+        versionName version_name
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
-
     signingConfigs {
         debug {
             //.android default keystore 정보
@@ -39,6 +40,8 @@ android {
             minifyEnabled false     //난독화 유무
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("long", "VERSION_CODE", "${defaultConfig.versionCode}")
+            buildConfigField("String","VERSION_NAME","\"${defaultConfig.versionName}\"")
             externalNativeBuild {
                 cmake {
                     //-D이후의 문자열이 변수명이 된다
@@ -50,6 +53,8 @@ android {
             minifyEnabled false     //난독화 유무
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("long", "VERSION_CODE", "${defaultConfig.versionCode}")
+            buildConfigField("String","VERSION_NAME","\"${defaultConfig.versionName}\"")
             externalNativeBuild {
                 cmake {
                     //-D이후의 문자열이 변수명이 된다
@@ -61,6 +66,8 @@ android {
             minifyEnabled false     //난독화 유무
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("long", "VERSION_CODE", "${defaultConfig.versionCode}")
+            buildConfigField("String","VERSION_NAME","\"${defaultConfig.versionName}\"")
             externalNativeBuild {
                 cmake {
                     //-D이후의 문자열이 변수명이 된다
@@ -95,10 +102,23 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
+    // retrofit + okhttp
+    implementation("com.squareup.okhttp3:okhttp:$okhttp_version")
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava3:$retrofit_version"
+
     // Koin for Kotlin apps
     implementation "io.insert-koin:koin-core:$koin_version"
     // Koin for Android
     implementation "io.insert-koin:koin-android:$koin_version"
-    // Koin for Android ViewModel
-    implementation "io.insert-koin:koin-android-viewmodel:$koin_version"
+
+    //Rxjava
+    implementation "io.reactivex.rxjava3:rxandroid:$rxjava_version"
+    // Because RxAndroid releases are few and far between, it is recommended you also
+    // explicitly depend on RxJava's latest version for bug fixes and new features.
+    // (see https://github.com/ReactiveX/RxJava/releases for latest 3.x.x version)
+    implementation "io.reactivex.rxjava3:rxjava:$rxjava_version"
+    implementation "io.reactivex.rxjava3:rxkotlin:$rxjava_version"
 }

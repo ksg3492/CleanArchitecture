@@ -1,11 +1,37 @@
 package com.sunggil.cleanarchitecture.ui
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
+import com.sunggil.cleanarchitecture.base.BaseNetworkViewModel
+import com.sunggil.cleanarchitecture.domain.model.Version
+import com.sunggil.cleanarchitecture.domain.usecase.GetVersionUseCase
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.observers.DisposableSingleObserver
+import io.reactivex.rxjava3.schedulers.Schedulers
 
-class MainViewModel : ViewModel() {
+class MainViewModel(
+    private val GetVersionUseCase : GetVersionUseCase
+) : BaseNetworkViewModel() {
+    private val API_NAME_GET_VERSION = "API_NAME_GET_VERSION"
 
-    fun init() {
-        Log.e("SG2","mainViewModel init()")
+    fun getVersion() {
+        cancelObserver(API_NAME_GET_VERSION)
+        addObserver(API_NAME_GET_VERSION,
+            this.GetVersionUseCase.getVersion()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { setLoading(true) }
+                .doAfterTerminate { setLoading(false) }
+                .subscribeWith(object : DisposableSingleObserver<Version>() {
+                    override fun onSuccess(t : Version?) {
+                        t?.let {
+                            Log.e("SG2", "getVersion version : $it")
+                        }
+                    }
+
+                    override fun onError(e : Throwable?) {
+                        Log.e("SG2", "getVersion error : ", e)
+                    }
+                })
+        )
     }
 }

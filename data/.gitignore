@@ -1,2 +1,5 @@
 /build
 /src/main/cpp/
+/src/main/cpp/debug
+/src/main/cpp/release
+/src/main/cpp/staging

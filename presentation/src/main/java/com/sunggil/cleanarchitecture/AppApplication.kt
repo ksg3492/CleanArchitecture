@@ -1,6 +1,10 @@
 package com.sunggil.cleanarchitecture
 
 import android.app.Application
+import com.sunggil.cleanarchitecture.data.di.*
+import com.sunggil.cleanarchitecture.di.dataSourceModule
+import com.sunggil.cleanarchitecture.di.repoModule
+import com.sunggil.cleanarchitecture.di.useCaseModule
 import com.sunggil.cleanarchitecture.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -20,6 +24,11 @@ class AppApplication : Application() {
             // use modules
             val listModule = arrayListOf<Module>()
             listModule.add(viewModelModule)
+            listModule.add(networkModule)
+            listModule.add(networkServiceModule)
+            listModule.add(useCaseModule)
+            listModule.add(repoModule)
+            listModule.add(dataSourceModule)
 
             modules(listModule)
         }
