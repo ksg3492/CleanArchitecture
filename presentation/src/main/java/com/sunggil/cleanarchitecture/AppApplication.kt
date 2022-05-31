@@ -2,10 +2,7 @@ package com.sunggil.cleanarchitecture
 
 import android.app.Application
 import com.sunggil.cleanarchitecture.data.di.*
-import com.sunggil.cleanarchitecture.di.dataSourceModule
-import com.sunggil.cleanarchitecture.di.repoModule
-import com.sunggil.cleanarchitecture.di.useCaseModule
-import com.sunggil.cleanarchitecture.di.viewModelModule
+import com.sunggil.cleanarchitecture.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
