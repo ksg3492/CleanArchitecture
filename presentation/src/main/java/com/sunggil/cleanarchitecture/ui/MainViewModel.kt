@@ -8,6 +8,7 @@ import com.sunggil.cleanarchitecture.domain.model.Category
 import com.sunggil.cleanarchitecture.domain.model.Version
 import com.sunggil.cleanarchitecture.domain.usecase.GetCategoryUseCase
 import com.sunggil.cleanarchitecture.domain.usecase.GetVersionUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
@@ -18,8 +19,10 @@ import io.reactivex.rxjava3.functions.BiFunction
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.PublishSubject
+import javax.inject.Inject
 
-class MainViewModel(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val GetVersionUseCase : GetVersionUseCase,
     private val GetCategoryUseCase : GetCategoryUseCase
 ) : BaseNetworkViewModel() {

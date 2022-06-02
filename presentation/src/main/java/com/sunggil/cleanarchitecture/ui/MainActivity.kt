@@ -1,18 +1,20 @@
 package com.sunggil.cleanarchitecture.ui
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import com.sunggil.cleanarchitecture.BuildConfig
 import com.sunggil.cleanarchitecture.databinding.ActivityMainBinding
 import com.sunggil.cleanarchitecture.domain.ServiceValue
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
-    private val mainViewModel : MainViewModel by viewModel()
+    private val mainViewModel : MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        this.mainViewModel.loadSplash()
+//        this.mainViewModel.loadSplash()
         this.mainViewModel.splashFinished.observe(this, Observer {
             it?.let {
                 val message = if (it) "Succeed" else "Failed"
@@ -33,8 +35,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            this.mainViewModel.loadSplash()
         }
     }
 }

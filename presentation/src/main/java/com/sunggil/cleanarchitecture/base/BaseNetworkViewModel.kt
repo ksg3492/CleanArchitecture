@@ -2,12 +2,11 @@ package com.sunggil.cleanarchitecture.base
 
 import androidx.annotation.CallSuper
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
-import org.koin.core.component.KoinComponent
 
 /**
  * 서버 통신 기능을 포함한 객체에 통신 cancel을 명시적으로 하기 위함.
  */
-abstract class BaseNetworkViewModel : BaseViewModel(), KoinComponent, NetworkInterface {
+abstract class BaseNetworkViewModel : BaseViewModel(), NetworkInterface {
     private var networkDisposable = HashMap<String, DisposableSingleObserver<*>>(0)
 
     /**
